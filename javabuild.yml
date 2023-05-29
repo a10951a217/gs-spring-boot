@@ -25,7 +25,7 @@ stages:
         - task: CopyFiles@2
           inputs:
             SourceFolder: '$(System.DefaultWorkingDirectory)'
-            Contents: '''**/target/*.?(war|jar)'''
+            Contents: '**/*.jar'
             TargetFolder: '$(Pipeline.Workspace)'
         - task: PublishPipelineArtifact@1
           inputs:
