@@ -1,0 +1,35 @@
+trigger:
+- master
+
+variables:
+ vmImageName: 'ubuntu-latest'
+
+stages:
+  - stage: Build
+    displayName: Build Stage 
+    jobs:
+      - job: MavenPackageandPublish
+        displayName: Maven Package and Publish Artifacts
+        pool: $(vmImageName)
+        steps:
+        - task: Maven@4
+          inputs:
+            mavenPomFile: 'pom.xml'
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            javaHomeOption: 'JDKVersion'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: false
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(System.DefaultWorkingDirectory)'
+            Contents: '''**/target/*.?(war|jar)'''
+            TargetFolder: '$(Pipeline.Workspace)'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'drop'
+            publishLocation: 'pipeline'
+            
