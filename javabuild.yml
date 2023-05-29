@@ -3,7 +3,6 @@ trigger:
 
 variables:
  vmImage: 'ubuntu-latest'
- mavenfilepath: 'apps/pom.xml'
 
 stages:
   - stage: Build
