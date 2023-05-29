@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
- vmImageName: 'ubuntu-latest'
+ vmImage: 'ubuntu-latest'
 
 stages:
   - stage: Build
@@ -10,7 +10,7 @@ stages:
     jobs:
       - job: MavenPackageandPublish
         displayName: Maven Package and Publish Artifacts
-        pool: $(vmImageName)
+        pool: $(vmImage)
         steps:
         - task: Maven@4
           inputs:
