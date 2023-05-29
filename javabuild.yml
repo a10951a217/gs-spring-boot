@@ -27,10 +27,10 @@ stages:
           inputs:
             SourceFolder: '$(System.DefaultWorkingDirectory)'
             Contents: '''**/target/*.?(war|jar)'''
-            TargetFolder: '$(Pipeline.Workspace)'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
         - task: PublishPipelineArtifact@1
           inputs:
-            targetPath: '$(Pipeline.Workspace)'
+            targetPath: '$(Build.ArtifactStagingDirectory)'
             artifact: 'drop'
             publishLocation: 'pipeline'
             
