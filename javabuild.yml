@@ -3,6 +3,7 @@ trigger:
 
 variables:
  vmImage: 'ubuntu-latest'
+ mavenfilepath: 'apps/pom.xml'
 
 stages:
   - stage: Build
@@ -15,7 +16,7 @@ stages:
         steps:
         - task: Maven@4
           inputs:
-            mavenPomFile: $(MAVENFILEPATH)
+            mavenPomFile: $(mavenfilepath)
             publishJUnitResults: false
             javaHomeOption: 'JDKVersion'
             mavenVersionOption: 'Default'
